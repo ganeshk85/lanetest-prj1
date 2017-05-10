@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Choose Image</h3>
+            <form #addform="ngForm">
+                <div class="form-group">  
+                  <input type="file" name="imagebox_img" required (change)="fileChange(input)" #input />
+                </div>
+                <br/>
+                <div>
+                  <img #lane_img [attr.src]='file_src' alt=""/>
+                </div>
+            </form>         
+        </div>
+        <div class="col-md-4">
+            <h3>Available Actions</h3>
+            <br/><br/>
+            <ul>
+                <li *ngFor="let item of source;">
+                    <button class="btn btn-default" (click)="performAction(source, confirmed, item, lane_img)" [disabled]="imageuploadstatus === 0">{{item.name}}</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>Applied Actions</h3>
+            <button class="btn btn-default" (click)="reset(input)" [disabled]="imageuploadstatus === 0">Reset</button>
+            <ul>
+                <li *ngFor="let item of confirmed;">
+                    <button class="btn btn-default" disabled>{{item.name}}</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
