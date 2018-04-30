@@ -26,7 +26,7 @@
             <button class="btn btn-default" (click)="reset(input)" [disabled]="imageuploadstatus === 0">Reset</button>
             <ul>
                 <li *ngFor="let item of confirmed;">
-                    <button class="btn btn-default" disabled>{{item.name}}</button>
+                    <button class="btn btn-default" (click)="undoAction(source, confirmed, item, lane_img, input)" [disabled]="imageuploadstatus === 0">{{item.name}}</button>
                 </li>
             </ul>
         </div>

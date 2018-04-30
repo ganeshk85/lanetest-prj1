@@ -68,6 +68,60 @@ export class ImageboxComponent implements OnInit{
     this.doMoveItem(source, confirmed, item);
   }
   
+  undoAction(source:Array<any>,target:Array<any>,item:any = null,img, input){
+		//add item into target 'confirmed' list
+		source.push( item );
+		
+		//remove item from source list
+		let idx = target.indexOf(item);
+		if (idx !== -1) {
+			target.splice(idx, 1);
+		}
+		
+		let i = 1;
+		let len = target.length;
+		
+		if(len != 0)
+		{//there actions still in the target, so apply the last action
+		  if(input)
+      {
+        this.readFile(input.files);  
+      }
+      
+      console.log(len);
+     
+      for (; i <= len; i += 1) {
+          let last_action = target[i-1].value;
+  		    
+          setTimeout(() => {
+              if(last_action == 'rotate')
+              {
+                this.rotate(45, img);
+              }
+              else if(last_action == 'translate')
+              {
+                this.translate(-40, 0, img)
+              }
+              else if(last_action == 'opacity')
+              {
+                this.opacity(0.5,img)
+              }
+              else if(last_action == 'scale')
+              {
+                this.scale(0.5,0.5,img)
+              }
+          }, i*500);
+      }
+		}
+		else
+		{
+		  if(input)
+      {
+        this.readFile(input.files);  
+      }
+		}
+  }
+  
   
   doMoveItem(source:Array<any>,target:Array<any>,item:any = null){
     let len = source.length;
